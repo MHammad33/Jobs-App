@@ -1,0 +1,23 @@
+{
+	"name": "jobs-app",
+	"version": "1.0.0",
+	"description": "A seamless platform connecting job seekers and employers built with Express.js",
+	"main": "index.js",
+	"scripts": {
+		"start": "node index.js",
+		"dev": "npx nodemon index.js"
+	},
+	"keywords": [
+		"jobs",
+		"express",
+		"nodejs",
+		"job-seekers",
+		"employers"
+	],
+	"author": "Muhammad Hammad Afzal",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/MHammad33/jobs-app"
+	},
+	"license": "ISC"
+}
