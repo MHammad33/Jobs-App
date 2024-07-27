@@ -4,8 +4,8 @@
 	"description": "A seamless platform connecting job seekers and employers built with Express.js",
 	"main": "index.js",
 	"scripts": {
-		"start": "node index.js",
-		"dev": "npx nodemon index.js"
+		"start": "node src/index.js",
+		"dev": "npx nodemon src/index.js"
 	},
 	"keywords": [
 		"jobs",

@@ -1,10 +1,12 @@
 const app = require("./app");
 
-const port = 3001;
-
 // Start Server
 const start = () => {
-  app.listen(port, () => console.log(`Listening on port ${port}`));
+  try {
+    app.listen(config.PORT, () => console.log(`Listening on port ${config.PORT}`));
+  } catch (err) {
+    console.log("Error connection:", err.message);
+  }
 }
 
 start();
