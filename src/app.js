@@ -1,5 +1,6 @@
 const express = require("express");
 const authRouter = require("./routes/auth.routes");
+const jobRouter = require("./routes/jobs.routes");
 
 const app = express();
 
@@ -13,5 +14,7 @@ app.get("/", (req, res) => {
 })
 
 app.use("/api/v1/auth", authRouter);
+app.use("/api/v1/jobs", jobRouter);
+
 
 module.exports = app;
