@@ -1,3 +1,8 @@
+const { StatusCodes } = require("http-status-codes");
+
+const Job = require("../models/Job.model");
+const { BadRequestError, NotFoundError } = require("../errors");
+
 // GET /api/v1/jobs
 const getAllJobs = async (req, res) => {
   res.json({ msg: "Get All Jobs" });
@@ -10,7 +15,11 @@ const getJob = async (req, res) => {
 
 // POST /api/v1/jobs
 const createJob = async (req, res) => {
-  res.json({ msg: "Create Job", user: req.user });
+  // Attach user to req.body
+  req.body.createdBy = req.user.userId;
+  const job = await Job.create(req.body);
+
+  res.status(StatusCodes.CREATED).json({ job });
 }
 
 // PUT /api/v1/jobs/:id
