@@ -11,7 +11,7 @@ jobRouter.route("/")
 // Route /api/v1/jobs/:id
 jobRouter.route("/:id")
   .get(jobController.getJob)
-  .put(jobController.updateJob)
+  .patch(jobController.updateJob)
   .delete(jobController.deleteJob)
 
 

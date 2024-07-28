@@ -37,9 +37,30 @@ const createJob = async (req, res) => {
   res.status(StatusCodes.CREATED).json({ job });
 }
 
-// PUT /api/v1/jobs/:id
+// PATCH /api/v1/jobs/:id
 const updateJob = async (req, res) => {
-  res.json({ msg: "Update Job" });
+  const {
+    body: { company, position },
+    user: { userId },
+    params: { id: jobId }
+  } = req;
+
+  if (company == "" || position == "") {
+    throw new BadRequestError("Company or Position cannot be empty");
+  }
+
+  const job = await Job.findOneAndUpdate(
+    { _id: jobId, createdBy: userId },
+    req.body,
+    { new: true, runValidators: true }
+  );
+
+  if (!job) {
+    throw new NotFoundError("The Job does not exist");
+  }
+
+
+  res.status(StatusCodes.OK).json({ job });
 };
 
 // DELETE /api/v1/jobs/:id
