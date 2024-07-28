@@ -1,6 +1,8 @@
+require("express-async-errors");
 const express = require("express");
 const authRouter = require("./routes/auth.routes");
 const jobRouter = require("./routes/jobs.routes");
+const middlewares = require("./middleware");
 
 const app = express();
 
@@ -16,5 +18,8 @@ app.get("/", (req, res) => {
 app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/jobs", jobRouter);
 
+// Error Handler Middleware
+app.use(middlewares.notFound);
+app.use(middlewares.errorHandler);
 
 module.exports = app;
