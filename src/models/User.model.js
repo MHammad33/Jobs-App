@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const bcryptjs = require("bcryptjs");
 
 const userSchema = new mongoose.Schema({
   name: {
@@ -31,6 +32,11 @@ userSchema.set("toJSON", {
     delete returnedObj.__v;
   }
 })
+
+userSchema.pre("save", async function () {
+  const salt = await bcryptjs.genSalt(10);
+  this.password = await bcryptjs.hash(this.password, salt);
+});
 
 const User = mongoose.model("User", userSchema);
 
