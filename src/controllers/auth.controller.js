@@ -1,13 +1,13 @@
 const { StatusCodes } = require("http-status-codes");
 
 const User = require("../models/User.model");
-const { BadRequest, UnauthenticatedError } = require("../errors");
+const { BadRequestError, UnauthenticatedError } = require("../errors");
 
 const login = async (req, res) => {
   const { email, password } = req.body;
 
   if (!email || !password) {
-    throw new BadRequest("Please provide email and password");
+    throw new BadRequestError("Please provide email and password");
   }
   const user = await User.findOne({ email });
   if (!user) {
