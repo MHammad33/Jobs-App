@@ -65,7 +65,18 @@ const updateJob = async (req, res) => {
 
 // DELETE /api/v1/jobs/:id
 const deleteJob = async (req, res) => {
-  res.json({ msg: "Delete Job" });
+  const {
+    user: { userId },
+    params: { id: jobId }
+  } = req;
+
+  const job = await Job.findOneAndDelete({ _id: jobId, createdBy: userId });
+
+  if (!job) {
+    throw new NotFoundError("The Job does not exist");
+  }
+
+  res.status(StatusCodes.OK).send();
 };
 
 module.exports = {
