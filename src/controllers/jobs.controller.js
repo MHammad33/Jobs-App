@@ -10,7 +10,7 @@ const getJob = async (req, res) => {
 
 // POST /api/v1/jobs
 const createJob = async (req, res) => {
-  res.json({ msg: "Craete Job" });
+  res.json({ msg: "Create Job", user: req.user });
 }
 
 // PUT /api/v1/jobs/:id

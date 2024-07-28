@@ -14,6 +14,7 @@ const authMiddleware = (req, res, next) => {
   try {
     // Attach user to the Job Routes
     req.user = jwt.verify(token, config.JWT_SECRET);
+    next();
   } catch (error) {
     console.log("Error Authenticating", error.message);
     throw new UnauthenticatedError("Authentication Invalid");
