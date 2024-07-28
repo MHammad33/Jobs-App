@@ -11,7 +11,21 @@ const getAllJobs = async (req, res) => {
 
 // GET /api/v1/jobs/:id
 const getJob = async (req, res) => {
-  res.json({ msg: "Get Single Job" });
+  const {
+    user: { userId },
+    params: { id: jobId }
+  } = req;
+
+  const job = await Job.findOne({
+    _id: jobId,
+    createdBy: userId
+  });
+
+  if (!job) {
+    throw new NotFoundError("The Job does not exist");
+  }
+
+  res.status(StatusCodes.OK).json({ job });
 };
 
 // POST /api/v1/jobs
